@@ -25,13 +25,7 @@
 
 ## <a name='types'>Tipos</a>
 
-  - **Primitivos**: Quando você acessa um tipo primitivo você lida diretamente com seu valor.
-
-    + `string`
-    + `number`
-    + `boolean`
-    + `null`
-    + `undefined`
+  - **Primitivos**: Quando você acessa um tipo primitivo você lida diretamente com seu valor. `string`, `number`, `boolean`, `null`, `undefined`
 
     ```javascript
     var numbers = 1;
@@ -41,11 +35,7 @@
 
     console.log(numbers, integers); // => 1, 9
     ```
-  - **Complexos**: Quando você acessa um tipo complexo você lida com a referência para seu valor.
-
-    + `object`
-    + `array`
-    + `function`
+  - **Complexos**: Quando você acessa um tipo complexo você lida com a referência para seu valor. `object`, `array`, `function`
 
     ```javascript
     var numbers = [1, 2];
