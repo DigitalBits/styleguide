@@ -18,6 +18,9 @@
   1. [Vírgulas](#commas)
   1. [Ponto e vírgulas](#semicolons)
   1. [Casting & Coerção de Tipos](#type-casting--coercion)
+  1. [Convenções de nomenclatura](#naming-conventions)
+  1. [Métodos Acessores](#accessors)
+  1. [jQuery](#jquery)
 
 
 ## <a name='types'>Tipos</a>
@@ -706,6 +709,158 @@
     // bom
     var hasAge = !!age;
     ```
+
+**[⬆ voltar ao topo](#table-of-contents)**
+
+
+## <a name='naming-conventions'>Convenções de nomenclatura</a>
+
+  - Não use apenas um caracter, seja descritivo.
+
+    ```javascript
+    // ruim
+    function q() {
+      // ...outras implementações...
+    }
+
+    // bom
+    function query() {
+      // ...outras implementações...
+    }
+    ```
+
+  - Use camelCase quando for nomear objetos, funções e instâncias.
+
+    ```javascript
+    // ruim
+    var OBJEcttsssss = {};
+    var this_is_my_object = {};
+    function c() {}
+    var u = new user({
+      name: 'Bob Parr'
+    });
+
+    // bom
+    var thisIsMyObject = {};
+    function thisIsMyFunction() {}
+    var user = new User({
+      name: 'Bob Parr'
+    });
+    ```
+
+  - Use PascalCase quando for nomear módulos, libs ou classes.
+
+    ```javascript
+    // ruim
+    var utils = require('./utils');
+    var userModel = require('../models/user');
+
+    // bom
+    var Utils = require('./utils');
+    var UserModel = require('../models/user');
+    ```
+
+  - Use um underscore `_` para colunas de banco de dados e propriedades que são transportadas via HTTP (REST Payload).
+
+    ```javascript
+    // ruim
+    res.json({
+      status: 'success',
+      data: {
+        name: 'Lucas',
+        motherName: 'Maria',
+        fatherName: 'Pedro'
+      }
+    });
+
+    // bom
+    res.json({
+      status: 'success',
+      data: {
+        name: 'Lucas',
+        mother_name: 'Maria',
+        father_name: 'Pedro'
+      }
+    });
+    ```
+
+
+
+  - **Nota:** IE8 ou inferior mostra alguns problemas com funções nomeadas. Veja [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) para mais informações.
+
+  - Se seu arquivos exporta apenas uma classes, o nome do arquivo deve conter exatamento o nome da classe.
+
+    ```javascript
+    // conteúdo do arquivo
+    class CheckBox {
+      // ...
+    }
+    module.exports = CheckBox;
+
+    // em outro arquivo
+    // ruim
+    var CheckBox = require('./checkBox');
+
+    // ruim
+    var CheckBox = require('./check_box');
+
+    // bom
+    var CheckBox = require('./CheckBox');
+    ```
+
+**[⬆ voltar ao topo](#table-of-contents)**
+
+
+## <a name='accessors'>Métodos Acessores</a>
+
+  - Métodos acessores de propriedades não são obrigatórios.
+  - Se você vai criar métodos acessores utilize getVal() e setVal('hello')
+
+    ```javascript
+    // ruim
+    dragon.age();
+
+    // bom
+    dragon.getAge();
+
+    // ruim
+    dragon.age(25);
+
+    // bom
+    dragon.setAge(25);
+    ```
+
+  - Se a propriedade é um boolean, use isVal() ou hasVal()
+
+    ```javascript
+    // ruim
+    if (!dragon.age()) {
+      // something
+    }
+
+    // bom
+    if (!dragon.hasAge()) {
+      // something
+    }
+    ```
+
+
+**[⬆ voltar ao topo](#table-of-contents)**
+
+
+
+## <a name='jquery'>jQuery</a>
+
+  - Use `jQuery` em vez de `$`.
+
+    ```javascript
+    // ruim
+    $('.sidebar').click();
+
+    // bom
+    jQuery('.sidebar').click();
+    ```
+
 
 **[⬆ voltar ao topo](#table-of-contents)**
 
