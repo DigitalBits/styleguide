@@ -1,17 +1,19 @@
-**# DigitalBits JavaScript Style Guide 
+# DigitalBits JavaScript Style Guide 
 
-*A nossa abordagem para JavaScript*
+*A nossa abordagem de JavaScript*
 
-## Índice
+
+## <a name='table-of-contents'>Índice</a>
 
   1. [Tipos](#types)
   1. [Objetos](#objects)
   1. [Arrays](#arrays)
   1. [Strings](#strings)
   1. [Funções](#functions)
-  
-  
-## Tipos
+  1. [Propriedades](#properties)
+
+
+## <a name='types'>Tipos</a>
 
   - **Primitivos**: Quando você acessa um tipo primitivo você lida diretamente com seu valor.
 
@@ -22,12 +24,12 @@
     + `undefined`
 
     ```javascript
-    var foo = 1;
-    var bar = foo;
+    var numbers = 1;
+    var integers = numbers;
 
-    bar = 9;
+    integers = 9;
 
-    console.log(foo, bar); // => 1, 9
+    console.log(numbers, integers); // => 1, 9
     ```
   - **Complexos**: Quando você acessa um tipo complexo você lida com a referência para seu valor.
 
@@ -36,17 +38,17 @@
     + `function`
 
     ```javascript
-    var foo = [1, 2];
-    var bar = foo;
+    var numbers = [1, 2];
+    var integers = numbers;
 
-    bar[0] = 9;
+    integers[0] = 9;
 
-    console.log(foo[0], bar[0]); // => 9, 9
+    console.log(numbers[0], integers[0]); // => 9, 9
     ```
 
 **[⬆ voltar ao topo](#table-of-contents)**
 
-## Objetos
+## <a name='objects'>Objetos</a>
 
   - Use a sintaxe literal para criação de objetos.
 
@@ -58,7 +60,7 @@
     var item = {};
     ```
 
-  - Não use [palavras reservadas](http://es5.github.io/#x7.6.1) como propriedade de objetos.
+  - Não use [palavras reservadas](http://es5.github.io/#x7.6.1) como chaves.
 
     ```javascript
     // ruim
@@ -95,7 +97,7 @@
 
 **[⬆ voltar ao topo](#table-of-contents)**
 
-## Arrays
+## <a name='arrays'>Arrays</a>
 
   - Use a sintaxe literal para a criação de Arrays.
 
@@ -110,16 +112,17 @@
   - Use Array.push() ao inves de atribuir um item diretamente ao array.
 
     ```javascript
-    var names = [];
+    var someStack = [];
+
 
     // ruim
-    names[names.length] = 'fulano';
+    someStack[someStack.length] = 'abracadabra';
 
     // bom
-    names.push('fulano');
+    someStack.push('abracadabra');
     ```
 
-  - Quando precisar copiar um Array utilize Array.slice(). [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
+  - Quando precisar copiar um Array utilize Array.slice().
 
     ```javascript
     var len = items.length;
@@ -135,25 +138,19 @@
     itemsCopy = items.slice();
     ```
 
-  - Para converter um objeto similar a um array para array, utilize Object.keys() + Array.map().
+ - Para converter um objeto similar a um array para array, utilize Object.keys() + Array.map().
 
     ```javascript
-    // quanto apenas as propriedades são importantes
-    var cars = {
-        porsche: true,
-        ferrari: true,
-        lamborghini: true
-    }
-    
-    cars = Object.keys(cars);
-    
-    // quando o conteúdo também for necessário
     var cars = {
         porsche: 134,
         ferrari: 70,
         lamborghini: 35
     }
     
+    // bom: quando apenas as propriedades são importantes
+    cars = Object.keys(cars);
+    
+    // bom: quando o conteúdo também for necessário
     cars = Object.keys(cars).map(function(key) {
         return {
             model: key,
@@ -165,7 +162,7 @@
 **[⬆ voltar ao topo](#table-of-contents)**
 
 
-## Strings
+## <a name='strings'>Strings</a>
 
   - Use aspas simples `''` para strings
 
@@ -184,7 +181,7 @@
     ```
 
   - Strings maiores que 80 caracteres devem ser escritas em múltiplas linhas e usar concatenação.
-  
+
     ```javascript
     // ruim
     var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
@@ -201,22 +198,22 @@
       'with this, you would get nowhere fast.';
     ```
 
-  - Quando for construir uma string programaticamente, use sempre concatenação de strings. 
+  - Quando for construir uma string programaticamente, use sempre concatenação de strings.     
 
 **[⬆ voltar ao topo](#table-of-contents)**
 
 
-## Funções
+## <a name='functions'>Funções</a>
 
   - Ao declarar Funções sempre use funções nomeadas:
 
     ```javascript
-    // ruim: função anônima
+    // ruim, função anônima
     var anonymous = function() {
       return true;
     };
 
-    // bom:  função nomeada
+    // bom, função nomeada
     function named() {
       return true;
     };
@@ -249,7 +246,7 @@
     greetings();
     ```
     
-  - Nunca nomeie um parâmetro como `arguments`. Isso sobrescrevá o objeto `arguments` que é passado para cada função.
+- Nunca nomeie um parâmetro como `arguments`. Isso sobrescrevá o objeto `arguments` que é passado para cada função.
 
     ```javascript
     // ruim
@@ -261,6 +258,42 @@
     function yup(name, options, args) {
       // ...outras implementações...
     }
+    ```
+
+**[⬆ voltar ao topo](#table-of-contents)**
+
+
+
+## <a name='properties'>Propriedades </a>
+
+  - Use ponto `.` para acessar propriedades.
+
+    ```javascript
+    var luke = {
+      jedi: true,
+      age: 28
+    };
+
+    // ruim
+    var isJedi = luke['jedi'];
+
+    // bom
+    var isJedi = luke.jedi;
+    ```
+
+  - Use colchetes `[]` para acessar propriedades através de uma variável.
+
+    ```javascript
+    var luke = {
+      jedi: true,
+      age: 28
+    };
+
+    function getProp(prop) {
+      return luke[prop];
+    }
+
+    var isJedi = getProp('jedi');
     ```
 
 **[⬆ voltar ao topo](#table-of-contents)**
